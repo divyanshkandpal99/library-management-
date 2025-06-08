@@ -42,6 +42,8 @@ public class LoginScreen extends JFrame {
         formPanel.add(usernameLabel, gbc);
         
         usernameField = new JTextField(20);
+        usernameField.setEnabled(true);
+        usernameField.setEditable(true);
         UIUtils.setTextFieldStyle(usernameField);
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -55,6 +57,8 @@ public class LoginScreen extends JFrame {
         formPanel.add(passwordLabel, gbc);
         
         passwordField = new JPasswordField(20);
+        passwordField.setEnabled(true);
+        passwordField.setEditable(true);
         UIUtils.setTextFieldStyle(passwordField);
         gbc.gridx = 1;
         gbc.gridy = 1;
@@ -78,6 +82,12 @@ public class LoginScreen extends JFrame {
         
         // Set default button
         getRootPane().setDefaultButton(loginButton);
+        
+        // Make the window visible
+        setVisible(true);
+        
+        // Request focus on username field
+        usernameField.requestFocusInWindow();
     }
     
     private void handleLogin() {
