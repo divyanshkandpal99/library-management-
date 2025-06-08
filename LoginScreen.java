@@ -1,6 +1,5 @@
 package ui;
 
-import utils.UIUtils;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,84 +8,84 @@ public class LoginScreen extends JFrame {
     private JPasswordField passwordField;
     
     public LoginScreen() {
+        // Basic window setup
         setTitle("Library Management System - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(400, 250);
         setResizable(false);
         
-        // Create main panel with padding
+        // Create main panel
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        mainPanel.setBackground(UIUtils.BACKGROUND_COLOR);
-        
-        // Create title label
-        JLabel titleLabel = new JLabel("Library Management System", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        titleLabel.setForeground(UIUtils.TEXT_COLOR);
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.setLayout(new GridBagLayout());
+        mainPanel.setBackground(new Color(240, 240, 240));
         
         // Create form panel
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridBagLayout());
-        formPanel.setBackground(UIUtils.BACKGROUND_COLOR);
+        formPanel.setBackground(new Color(240, 240, 240));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(5, 5, 5, 5);
         
-        // Username field
-        JLabel usernameLabel = new JLabel("Username:");
-        UIUtils.setLabelStyle(usernameLabel);
+        // Title
+        JLabel titleLabel = new JLabel("Library Management System");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(0, 0, 20, 0);
+        formPanel.add(titleLabel, gbc);
+        
+        // Username
+        JLabel usernameLabel = new JLabel("Username:");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(5, 5, 5, 5);
         formPanel.add(usernameLabel, gbc);
         
         usernameField = new JTextField(20);
-        usernameField.setEnabled(true);
-        usernameField.setEditable(true);
-        UIUtils.setTextFieldStyle(usernameField);
         gbc.gridx = 1;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         formPanel.add(usernameField, gbc);
         
-        // Password field
+        // Password
         JLabel passwordLabel = new JLabel("Password:");
-        UIUtils.setLabelStyle(passwordLabel);
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         formPanel.add(passwordLabel, gbc);
         
         passwordField = new JPasswordField(20);
-        passwordField.setEnabled(true);
-        passwordField.setEditable(true);
-        UIUtils.setTextFieldStyle(passwordField);
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         formPanel.add(passwordField, gbc);
         
         // Login button
         JButton loginButton = new JButton("Login");
-        UIUtils.setButtonStyle(loginButton);
+        loginButton.setBackground(new Color(51, 122, 183));
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setFocusPainted(false);
         loginButton.addActionListener(e -> handleLogin());
+        
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(20, 5, 5, 5);
         formPanel.add(loginButton, gbc);
         
-        mainPanel.add(formPanel, BorderLayout.CENTER);
+        mainPanel.add(formPanel);
         add(mainPanel);
         
-        // Center the window
-        UIUtils.centerWindow(this);
+        // Center window
+        setLocationRelativeTo(null);
         
         // Set default button
         getRootPane().setDefaultButton(loginButton);
         
-        // Make the window visible
+        // Make window visible
         setVisible(true);
         
-        // Request focus on username field
+        // Focus username field
         usernameField.requestFocusInWindow();
     }
     
@@ -101,7 +100,10 @@ public class LoginScreen extends JFrame {
                 dashboard.setVisible(true);
             });
         } else {
-            UIUtils.showError(this, "Invalid username or password!");
+            JOptionPane.showMessageDialog(this,
+                "Invalid username or password!",
+                "Login Error",
+                JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -117,4 +119,4 @@ public class LoginScreen extends JFrame {
             loginScreen.setVisible(true);
         });
     }
-} 
+}
