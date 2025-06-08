@@ -2,6 +2,12 @@
 
 A complete GUI-based Library Management System built with Java Swing and file-based storage.
 
+
+### Login Credentials
+- Username: admin
+- Password: admin123
+
+
 ## Features
 
 ### Book Management
@@ -68,9 +74,6 @@ The system uses three text files for data persistence:
 - `members.txt`: Stores member information
 - `issues.txt`: Stores issue records
 
-### Login Credentials
-- Username: admin
-- Password: admin123
 
 ## Getting Started
 
